@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metropole Hotel - Restaurants & Bars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        body {
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 15px 400px;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            width: 80px;
+        }
+        
+        .logo img {
+            max-width: 100%;
+        }
+        
+        .book-btn {
+            background-color: #727d41;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        
+        .mobile-book-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #727d41;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            z-index: 99;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            border: 15px solid transparent;
+            border-image: linear-gradient(to bottom, #c5a764, transparent) 1;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .breadcrumb {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            background-color: #f5f5f5;
+            font-size: 14px;
+        }
+        
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .page-title {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 28px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: white;
+            z-index: 101;
+            transition: left 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.active {
+            left: 0;
+        }
+        
+        .mobile-nav {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100%;
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .dot.active {
+            background-color: white;
+        }
+        
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-icon {
+                display: block;
+            }
+            
+            .logo {
+                width: 60px;
+            }
+            
+            .top-nav {
+                padding: 10px 15px;
+            }
+            
+            .mobile-book-btn {
+                display: block;
+            }
+        }
+        
+        @media (min-width: 601px) and (max-width: 900px) {
+            .hero {
+                height: 80vh;
+                border: 12px solid transparent;
+            }
+            
+            .page-title {
+                font-size: 26px;
+                padding: 35px 20px;
+            }
+            
+            .content {
+                padding: 0 20px 60px;
+                font-size: 15px;
+            }
+            
+            .breadcrumb {
+                font-size: 13px;
+                padding: 12px 20px;
+            }
+            
+            .slider-dots {
+                gap: 9px;
+                bottom: 18px;
+            }
+            
+            .dot {
+                width: 11px;
+                height: 11px;
+            }
+            
+            .mobile-menu {
+                width: 220px;
+                left: -220px;
+            }
+            
+            .mobile-nav a {
+                font-size: 15px;
+            }
+            
+            .mobile-book-btn {
+                padding: 11px 22px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero {
+                height: 60vh;
+                border: 10px solid transparent;
+            }
+            
+            .page-title {
+                font-size: 24px;
+                padding: 30px 15px;
+            }
+            
+            .content {
+                padding: 0 15px 60px;
+                font-size: 14px;
+            }
+            
+            .breadcrumb {
+                font-size: 12px;
+                padding: 10px 15px;
+            }
+            
+            .slider-dots {
+                gap: 8px;
+                bottom: 15px;
+            }
+            
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .mobile-menu {
+                width: 200px;
+                left: -200px;
+            }
+            
+            .mobile-book-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-menu">
+        <div class="mobile-nav">
+            <a href="#">Restaurants & Bars</a>
+            <a href="#">Meetings & Events</a>
+            <a href="#">Accommodation</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    <button class="mobile-book-btn">Book a reservation</button>
+    
+    <nav class="top-nav">
+        <div class="menu-icon">≡</div>
+        <div class="nav-links">
+            <a href="#">Restaurants & Bars</a>
+            <a href="#">Meetings & Events</a>
+        </div>
+        <div class="logo">
+            <img src="./static/logowebsite.png" alt="Metropole Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#">Accommodation</a>
+            <button class="book-btn">Book a reservation</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <img class="hero-image" src="static/img1.jpg" alt="Elegant dessert display at Metropole Hotel">
+        <div class="slider-dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="#">Home</a> / <span>RESTAURANTS & BARS</span>
+    </div>
+
+    <h1 class="page-title">RESTAURANTS & BARS</h1>
+
+    <div class="content">
+        <p><em>Vietnamese-French</em> cuisine with the opulent elegance of Rococo design. The menu features authentic <em>Vietnamese-French</em> dishes infused with creative, 
+            modern presentations to match the restaurant’s artistic aesthetic. The décor is a stunning fusion of styles, where intricate Rococo moldings, gilded accents, and crystal chandeliers.
+            The ambiance is refined yet inviting, appealing to a clientele that values sophistication and cultural depth—young professionals, families, and food enthusiasts alike.
+        </p>
+    </div>
+
+    <script>
+        const menuIcon = document.querySelector('.menu-icon');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.overlay');
+        
+        menuIcon.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+        
+        // Close hamburger menu when clicking overlay
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+        
+        // Close hamburger menu when clicking a menu item
+        mobileMenu.querySelectorAll('a').forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
